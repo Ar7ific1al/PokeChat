@@ -1,0 +1,28 @@
+author: Ar7ific1al
+description: Admin chat and other chat functions for PokeBlock
+main: com.github.ar7ific1al.pokechat.Main
+name: PokeChat
+url: 
+version: 0.1a
+commands:
+    ac:
+        description: Toggle Admin Chat
+        usage: /<command>
+        aliases: [a]
+    gc:
+        description: Toggle Gym Leader Chat
+        usage: /<command>
+        aliases: [g]
+permissions:
+    pokechat.chat.admin:
+        description: Grants all chat channel permissions
+        children:
+          pokechat.chat.adminchat: true
+          pokechat.chat.gymleaderchat: true
+        default: op
+    pokechat.chat.adminchat:
+        description: See and chat in Admin Chat
+        default: op
+    pokechat.chat.gymleaderchat:
+        description: See and chat in Gym Leader Chat
+        default: op

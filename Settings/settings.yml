@@ -1,0 +1,26 @@
+##############################
+#  PokeChat Settings v0.1a   #
+#  PokeChat by Ar7ific1al    #
+#  for CraftBlock's PokeBlock#
+#  server                    #
+##############################
+
+ChatChannels:
+  Admin:
+    ##  Allow using color codes like &a or &4 in admin chat
+    AllowColors: true
+  GymLeader:
+    ##  Private chat channel for Gym Leaders
+    AllowColors: true
+  Party:
+    ##  Private chat channel for each party
+    AllowColors: true
+
+Parties:
+  ##  If enabled, players with permission can create a new party and invite players to the party
+  Enabled: true
+  
+Admin:
+  Snooping:
+    ##  Snooping allows admins to read chat in other private channels
+    PartyChat: false
