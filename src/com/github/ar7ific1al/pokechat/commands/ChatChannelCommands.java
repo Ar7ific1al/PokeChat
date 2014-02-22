@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -111,14 +112,59 @@ public class ChatChannelCommands implements CommandExecutor {
 			}catch(ArrayIndexOutOfBoundsException ex){
 				
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InvalidConfigurationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+		}
+		else if (sender instanceof ConsoleCommandSender){
+			try{
+				if (args.length >= 1){
+					if (label.equalsIgnoreCase("ac"))	{
+						FileConfiguration tmpfc = new YamlConfiguration();
+						tmpfc.load(Main.SettingsFile);
+						String message = "";
+						for (int i = 0; i < args.length; i++){
+							message += args[i];
+							if (i != args.length)
+								message += " ";
+						}
+						if (tmpfc.getBoolean("ChatChannels.Admin.AllowColors"))	{
+							message = Log.ColorMessage(message);
+						}
+						for (Player p : Bukkit.getServer().getOnlinePlayers()){
+							if (p.hasPermission("pokechat.chat.adminchat")){
+								p.sendMessage((Log.ColorMessage("&4[&7AC&4] " + sender.getName() + ": &f")) + message);
+							}
+						}
+						Bukkit.getServer().getConsoleSender().sendMessage((Log.ColorMessage("&4[&7AC&4] " + sender.getName() + ": &f")) + message);
+						return true;
+					}
+					else if (label.equalsIgnoreCase("gc")){
+						FileConfiguration tmpfc = new YamlConfiguration();
+						tmpfc.load(Main.SettingsFile);
+						String message = "";
+						for (int i = 0; i < args.length; i++){
+							message += args[i];
+							if (i != args.length)
+								message += " ";
+						}
+						if (tmpfc.getBoolean("ChatChannels.GymLeader.AllowColors"))	{
+							message = Log.ColorMessage(message);
+						}
+						for (Player p : Bukkit.getServer().getOnlinePlayers()){
+							if (p.hasPermission("pokechat.chat.gymleaderchat")){
+								p.sendMessage((Log.ColorMessage("&b[&7GC&b] " + sender.getName() + ": &f")) + message);
+							}
+						}
+						Bukkit.getServer().getConsoleSender().sendMessage((Log.ColorMessage("&b[&7GC&b] " + sender.getName() + ": &f")) + message);
+						return true;
+					}
+				}
+			}catch(ArrayIndexOutOfBoundsException | IOException | InvalidConfigurationException ex){
+				
 			}
 		}
 		return false;
