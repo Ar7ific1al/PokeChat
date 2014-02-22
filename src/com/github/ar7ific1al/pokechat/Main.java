@@ -1,5 +1,7 @@
 package com.github.ar7ific1al.pokechat;
 
+//	PokeChat v0.1a by Ar7ific1al
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
